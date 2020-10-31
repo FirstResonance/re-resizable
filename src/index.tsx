@@ -108,6 +108,7 @@ export interface ResizableProps {
   defaultSize?: Size;
   scale?: number;
   resizeRatio?: number;
+  contentEditable?: boolean;
 }
 
 interface State {
@@ -262,7 +263,7 @@ const definedProps = [
   'handleComponent',
   'scale',
   'resizeRatio',
-  'snapGap',
+  'snapGap'
 ];
 
 // HACK: This class is used to calculate % size.
@@ -915,7 +916,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
       acc[key] = this.props[key as keyof ResizableProps];
       return acc;
     }, {} as { [key: string]: any });
-
+    if(!extendsProps.contentEditable) extendsProps.contentEditable = false
     const style: React.CSSProperties = {
       position: 'relative',
       userSelect: this.state.isResizing ? 'none' : 'auto',
@@ -937,7 +938,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
 
     return (
       <Wrapper ref={this.ref} style={style} className={this.props.className} {...extendsProps}>
-        {this.state.isResizing && <div style={this.state.backgroundStyle} />}
+        {this.state.isResizing && <div style={this.state.backgroundStyle} {...extendsProps} />}
         {this.props.children}
         {this.renderResizer()}
       </Wrapper>
