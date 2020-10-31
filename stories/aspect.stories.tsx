@@ -11,7 +11,6 @@ storiesOf('aspect', module).add('default', () => (
       height: 300,
     }}
     lockAspectRatio
-    contentEditable={false}
   >
     001
   </Resizable>

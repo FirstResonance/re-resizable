@@ -908,7 +908,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
       acc[key] = this.props[key as keyof ResizableProps];
       return acc;
     }, {} as { [key: string]: any });
-
+    if(!extendsProps.contentEditable) extendsProps.contentEditable = false
     const style: React.CSSProperties = {
       position: 'relative',
       userSelect: this.state.isResizing ? 'none' : 'auto',
