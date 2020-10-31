@@ -246,7 +246,7 @@ const definedProps = [
   'handleComponent',
   'scale',
   'resizeRatio',
-  'snapGap',
+  'snapGap'
 ];
 
 // HACK: This class is used to calculate % size.
@@ -503,7 +503,6 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
     element.style.transform = 'scale(0, 0)';
     element.style.left = '0';
     element.style.flex = '0';
-    element.setAttribute('contentEditable', 'false');
     if (element.classList) {
       element.classList.add(baseClassName);
     } else {
