@@ -11,7 +11,6 @@ storiesOf('aspect', module).add('default', () => (
       height: 300,
     }}
     lockAspectRatio
-    //@ts-ignore
     contentEditable={false}
   >
     001

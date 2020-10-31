@@ -108,6 +108,7 @@ export interface ResizableProps {
   defaultSize?: Size;
   scale?: number;
   resizeRatio?: number;
+  contentEditable?: boolean;
 }
 
 interface State {
@@ -865,7 +866,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
     this.setState({ width: size.width, height: size.height });
   }
 
-  renderResizer(extendsProps: { [key: string]: any }) {
+  renderResizer() {
     const { enable, handleStyles, handleClasses, handleWrapperStyle, handleWrapperClass, handleComponent } = this.props;
     if (!enable) {
       return null;
@@ -875,7 +876,6 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
         return (
           <Resizer
             key={dir}
-            {...extendsProps}
             direction={dir as Direction}
             onResizeStart={this.onResizeStart}
             replaceStyles={handleStyles && handleStyles[dir as Direction]}
@@ -889,7 +889,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
     });
     // #93 Wrap the resize box in span (will not break 100% width/height)
     return (
-      <span className={handleWrapperClass} style={handleWrapperStyle} {...extendsProps}>
+      <span className={handleWrapperClass} style={handleWrapperStyle}>
         {resizers}
       </span>
     );
@@ -933,7 +933,7 @@ export class Resizable extends React.PureComponent<ResizableProps, State> {
       <Wrapper ref={this.ref} style={style} className={this.props.className} {...extendsProps}>
         {this.state.isResizing && <div style={this.state.backgroundStyle} {...extendsProps} />}
         {this.props.children}
-        {this.renderResizer(extendsProps)}
+        {this.renderResizer()}
       </Wrapper>
     );
   }
